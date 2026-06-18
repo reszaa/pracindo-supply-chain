@@ -23,19 +23,19 @@ jobs:
       - name: Build and push Backend Image
         uses: docker/build-push-action@v6 # Di-update dari v5 ke v6
         with:
-          context: ./scm__backend_v2
-          file: ./scm__backend_v2/Dockerfile
+          context: ./backend
+          file: ./backend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/pracindo-backend:latest
 
       - name: Generate Frontend Environment File
         run: |
-          echo "VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}" > ./supply_chain_management/.env.production
+          echo "VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}" > ./frontend/.env.production
 
       - name: Build and push Frontend Image
         uses: docker/build-push-action@v6 # Di-update dari v5 ke v6
         with:
-          context: ./supply_chain_management
-          file: ./supply_chain_management/Dockerfile
+          context: ./frontend
+          file: ./frontend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/pracindo-frontend:latest
